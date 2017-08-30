@@ -1,1 +1,11 @@
-D:\LERP2DEV\Lerp2Dev Visual Studio\LiteLerped-WF-API\LiteLerped-WF-API\bin\Debug\LiteLerped-WF-API.exe.config
+D:\LERP2DEV\Lerp2Dev Visual Studio\LiteLerped-WF-API\LiteLerped-WF-API\obj\Debug\LiteLerped-WF-API.csprojResolveAssemblyReference.cache
+D:\LERP2DEV\Lerp2Dev Visual Studio\LiteLerped-WF-API\LiteLerped-WF-API\obj\Debug\LiteLerped_WF_API.frmCredentials.resources
+D:\LERP2DEV\Lerp2Dev Visual Studio\LiteLerped-WF-API\LiteLerped-WF-API\obj\Debug\LiteLerped_WF_API.Properties.Resources.resources
+D:\LERP2DEV\Lerp2Dev Visual Studio\LiteLerped-WF-API\LiteLerped-WF-API\obj\Debug\LiteLerped_WF_API.Resources.Credentials.resources
+D:\LERP2DEV\Lerp2Dev Visual Studio\LiteLerped-WF-API\LiteLerped-WF-API\obj\Debug\LiteLerped_WF_API.Lang.Credentials.en.resources
+D:\LERP2DEV\Lerp2Dev Visual Studio\LiteLerped-WF-API\LiteLerped-WF-API\obj\Debug\LiteLerped_WF_API.Lang.Credentials.es.resources
+D:\LERP2DEV\Lerp2Dev Visual Studio\LiteLerped-WF-API\LiteLerped-WF-API\obj\Debug\LiteLerped-WF-API.csproj.GenerateResource.Cache
+D:\LERP2DEV\Lerp2Dev Visual Studio\LiteLerped-WF-API\LiteLerped-WF-API\obj\Debug\en\LiteLerped-WF-API.resources.dll
+D:\LERP2DEV\Lerp2Dev Visual Studio\LiteLerped-WF-API\LiteLerped-WF-API\obj\Debug\es\LiteLerped-WF-API.resources.dll
+D:\LERP2DEV\Lerp2Dev Visual Studio\LiteLerped-WF-API\LiteLerped-WF-API\obj\Debug\LiteLerped-WF-API.pdb
+D:\LERP2DEV\Lerp2Dev Visual Studio\LiteLerped-WF-API\LiteLerped-WF-API\obj\Debug\LiteLerped-WF-API.dll

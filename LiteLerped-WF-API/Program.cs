@@ -1,22 +1,25 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace LiteLerped_WF_API
 {
-    static class Program
+    public static class Program
     {
+        public static Lerp2Web.Lerp2Web web;
+        public static frmCredentials cred;
+
         /// <summary>
         /// Punto de entrada principal para la aplicación.
         /// </summary>
         [STAThread]
-        static void Main()
+        private static void Main()
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+
+            cred = new frmCredentials();
+
+            Application.Run(cred);
         }
     }
 }
