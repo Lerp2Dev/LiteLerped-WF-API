@@ -1,15 +1,19 @@
 ﻿using Lerp2Web;
+using LiteLerped_WF_API.Classes;
 using LiteLerped_WF_API.Controls;
+using LiteLerped_WF_API.Properties;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Drawing;
 using System.Linq;
 using System.Text.RegularExpressions;
+using System.Threading;
 using System.Windows.Forms;
+using Timer = System.Windows.Forms.Timer;
 
 namespace LiteLerped_WF_API
 { //Este namespace tiene que ser distinto
-    public partial class frmCredentials : Form
+    public partial class frmCredentials : LocalizedForm
     {
         public const string GoogleKey = "6LexLsMSAAAAABUuI6bvUYfxaumgcu0vGiEFotDA",
                             ValidNicknameChars = "ABCDEFGHIJKLMNÑOPQRSTUVWXYZabcdefghijklmnñopqrstuvwxyz0123456789.-_";
@@ -66,8 +70,8 @@ namespace LiteLerped_WF_API
                 Login(doLogin); //Este no funciona muy bien...
             }
 
-            API.lang = new LanguageManager(typeof(Program).Namespace + ".Lang.Credentials", SwitchLang);
-            API.lang.Switch((LerpedLanguage) Enum.Parse(typeof(LerpedLanguage), AppSetts.Default.DefaultLanguage));
+            Program.lang = new LanguageManager(menuStrip1, Settings.Default.DefaultLanguage); //typeof(Program).Namespace + ".Properties.Lang.Credentials",
+            //Program.lang.Switch((LerpedLanguage) Enum.Parse(typeof(LerpedLanguage), Settings.Default.DefaultLanguage));
 
             pictureBox1.Key = GoogleKey;
 
@@ -139,12 +143,12 @@ namespace LiteLerped_WF_API
 
         private void españolToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            API.lang.Switch(LerpedLanguage.ES);
+            //Program.lang.Switch(LerpedLanguage.ES);
         }
 
         private void englishToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            API.lang.Switch(LerpedLanguage.EN);
+            //Program.lang.Switch(LerpedLanguage.EN);
         }
 
         private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
@@ -264,11 +268,12 @@ namespace LiteLerped_WF_API
 
         private void SwitchLang(LerpedLanguage lng)
         {
-            languageToolStripMenuItem.Text = API.lang.GetString("languageMenu");
-            tabLogin.Text = API.lang.GetString("tabLogin");
-            tabRegister.Text = API.lang.GetString("tabRegister");
-            button1.Text = API.lang.GetString("tabLogin");
-            button2.Text = API.lang.GetString("tabRegister");
+            Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo(lng.ToString().ToLower());
+            /*languageToolStripMenuItem.Text = Program.lang.GetString("languageMenu");
+            tabLogin.Text = Program.lang.GetString("tabLogin");
+            tabRegister.Text = Program.lang.GetString("tabRegister");
+            button1.Text = Program.lang.GetString("tabLogin");
+            button2.Text = Program.lang.GetString("tabRegister");*/
         }
     }
 }

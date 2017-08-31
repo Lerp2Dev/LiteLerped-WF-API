@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace LiteLerped_WF_API.Resources {
+namespace LiteLerped_WF_API.Properties.Credentials {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace LiteLerped_WF_API.Resources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Credentials {
+    internal class Res {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Credentials() {
+        internal Res() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace LiteLerped_WF_API.Resources {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("LiteLerped_WF_API.Resources.Credentials", typeof(Credentials).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("LiteLerped_WF_API.Properties.Credentials.Res", typeof(Res).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

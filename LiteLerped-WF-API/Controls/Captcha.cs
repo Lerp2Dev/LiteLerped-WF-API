@@ -29,7 +29,7 @@ namespace LiteLerped_WF_API.Controls
 
         public Captcha()
         {
-            rMan = new ResourceManager(typeof(Program).Namespace + ".Resources.Credentials", Assembly.GetExecutingAssembly());
+            rMan = new ResourceManager(typeof(Program).Namespace + ".Properties.Credentials.Res", Assembly.GetExecutingAssembly());
             Control container = new ContainerControl()
             {
                 Dock = DockStyle.Fill,

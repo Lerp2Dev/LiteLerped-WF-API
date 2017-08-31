@@ -1,10 +1,12 @@
-﻿using System;
+﻿using LiteLerped_WF_API.Classes;
+using System;
 using System.Windows.Forms;
 
 namespace LiteLerped_WF_API
 {
     public static class Program
     {
+        public static LanguageManager lang;
         public static Lerp2Web.Lerp2Web web;
         public static frmCredentials cred;
 
