@@ -22,3 +22,4 @@ D:\LERP2DEV\Lerp2Dev Visual Studio\LiteLerped-WF-API\LiteLerped-WF-API\obj\Debug
 D:\LERP2DEV\Lerp2Dev Visual Studio\LiteLerped-WF-API\LiteLerped-WF-API\obj\Debug\fr\LiteLerped-WF-API.resources.dll
 D:\LERP2DEV\Lerp2Dev Visual Studio\LiteLerped-WF-API\LiteLerped-WF-API\obj\Debug\LiteLerped-WF-API.dll
 D:\LERP2DEV\Lerp2Dev Visual Studio\LiteLerped-WF-API\LiteLerped-WF-API\obj\Debug\LiteLerped-WF-API.pdb
+D:\LERP2DEV\Lerp2Dev Visual Studio\LiteLerped-WF-API\LiteLerped-WF-API\obj\Debug\LiteLerped-WF-API.csprojResolveAssemblyReference.cache

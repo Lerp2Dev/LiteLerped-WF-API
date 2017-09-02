@@ -55,18 +55,7 @@ namespace LiteLerped_WF_API.Classes
 
         internal LanguageManager(string def) //string baseName, Action<LerpedLanguage> act //MenuStrip menu,
         {
-            //this.baseName = baseName;
-
-            //Create a menu for the ActiveForm
-
-            /*Switch = (lang) =>
-            {
-                //culture = CultureInfo.CreateSpecificCulture(lang.ToString().ToLower());
-                act(lang);
-            };*/
-
             GlobalUICulture = CultureInfo.GetCultureInfo(def);
-            //AttachMenu(menu);
         }
 
         public static void AttachMenu(MenuStrip menu)
@@ -123,7 +112,7 @@ namespace LiteLerped_WF_API.Classes
                 Console.WriteLine("Res name: " + resourceName);
             }*/
 
-            /*ResourceSet resourceSet = new ComponentResourceManager(typeof(frmCredentials)).GetResourceSet(CultureInfo.CreateSpecificCulture(lang), true, true);
+            /*ResourceSet resourceSet = new ComponentResourceManager(typeof(frmCredentials)).GetResourceSet(CultureInfo.GetCultureInfo(lang), true, true);
             foreach (DictionaryEntry entry in resourceSet)
             {
                 string resourceKey = entry.Key.ToString();
@@ -135,29 +124,6 @@ namespace LiteLerped_WF_API.Classes
             //foreach (Form frm in Application.OpenForms)
             //    LocalizeForm(frm);
         }
-
-        private static void LocalizeForm(Form frm)
-        {
-            //Console.WriteLine(frm.Name);
-            var manager = new ComponentResourceManager(frm.GetType());
-            manager.ApplyResources(frm, "$this");
-            ApplyResources(manager, frm.Controls);
-        }
-
-        private static void ApplyResources(ComponentResourceManager manager, Control.ControlCollection ctls)
-        {
-            foreach (Control ctl in ctls)
-            {
-                //Console.WriteLine("Control: {0} ({1})", ctl.Name, ctl.GetType().Name);
-                manager.ApplyResources(ctl, ctl.Name);
-                ApplyResources(manager, ctl.Controls);
-            }
-        }
-
-        /*public string GetString(string str)
-        {
-            return ResMan.GetString(str, culture);
-        }*/
     }
 
     #endregion "Languages"

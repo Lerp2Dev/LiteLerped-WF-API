@@ -56,6 +56,11 @@ namespace LiteLerped_WF_API
 
         public frmCredentials()
         {
+            Shown += (sender, e) =>
+            {
+                Program.lang = new LanguageManager(Settings.Default.DefaultLanguage);
+            };
+
             InitializeComponent();
         }
 
@@ -71,7 +76,7 @@ namespace LiteLerped_WF_API
                 Login(doLogin); //Este no funciona muy bien...
             }
 
-            Program.lang = new LanguageManager(Settings.Default.DefaultLanguage); //typeof(Program).Namespace + ".Properties.Lang.Credentials",
+            //typeof(Program).Namespace + ".Properties.Lang.Credentials",
             //Program.lang.Switch((LerpedLanguage) Enum.Parse(typeof(LerpedLanguage), Settings.Default.DefaultLanguage));
 
             pictureBox1.Key = GoogleKey;
@@ -138,18 +143,8 @@ namespace LiteLerped_WF_API
                 //Append here language menu
                 //Append also the logout menu
 
-                Program.cred.Hide();
+                Application.OpenForms["frmCredentials"].Hide();
             };
-        }
-
-        private void españolToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            //Program.lang.Switch(LerpedLanguage.ES);
-        }
-
-        private void englishToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            //Program.lang.Switch(LerpedLanguage.EN);
         }
 
         private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
@@ -219,34 +214,6 @@ namespace LiteLerped_WF_API
         private void frmCredentials_FormClosing(object sender, FormClosingEventArgs e)
         {
             //...
-        }
-
-        private void englishToolStripMenuItem_Click_1(object sender, EventArgs e)
-        {
-            string lang = (string) ((ToolStripMenuItem) sender).Tag;
-            LanguageManager.ChangeLanguage(lang);
-            base.Culture = CultureInfo.GetCultureInfo(lang);
-        }
-
-        private void spanishToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            string lang = (string) ((ToolStripMenuItem) sender).Tag;
-            LanguageManager.ChangeLanguage("es");
-            base.Culture = CultureInfo.GetCultureInfo(lang);
-        }
-
-        private void frenchToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            string lang = (string) ((ToolStripMenuItem) sender).Tag;
-            LanguageManager.ChangeLanguage(lang);
-            base.Culture = CultureInfo.GetCultureInfo(lang);
-        }
-
-        private void germanToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            string lang = (string) ((ToolStripMenuItem) sender).Tag;
-            LanguageManager.ChangeLanguage(lang);
-            base.Culture = CultureInfo.GetCultureInfo(lang);
         }
 
         private void Register()

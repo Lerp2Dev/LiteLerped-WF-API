@@ -1,11 +1,13 @@
-﻿using Lerp2Web;
-using LiteLerped_WF_API.Classes;
-using LiteLerped_WF_API.Classes.Extensions;
+﻿using LiteLerped_WF_API.Classes;
 using LiteLerped_WF_API.Controls.Extensions;
+using LiteLerped_WF_API.Properties;
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
 using System.Linq;
+using System.Resources;
 using System.Windows.Forms;
 
 namespace LiteLerped_WF_API.Controls
@@ -22,7 +24,7 @@ namespace LiteLerped_WF_API.Controls
         public event EventHandler CultureChanged;
 
         protected CultureInfo culture;
-        protected ComponentResourceManager resManager;
+        //protected ComponentResourceManager resManager;
 
         /// <summary>
         /// Current culture of this form
@@ -37,7 +39,31 @@ namespace LiteLerped_WF_API.Controls
             {
                 if (this.culture != value)
                 {
-                    this.ApplyResources(this, value);
+                    //this.ApplyResources(this, value);
+
+                    ResourceSet resourceSet = new ComponentResourceManager(GetType()).GetResourceSet(value, true, true);
+                    IEnumerable<DictionaryEntry> entries = resourceSet
+                        .Cast<DictionaryEntry>()
+                        .Where(x => x.Key.ToString().Contains(".Text"))
+                        .Select(x => { x.Key = x.Key.ToString().Replace(">", "").Split('.')[0]; return x; });
+
+                    foreach (DictionaryEntry entry in entries)
+                    {
+                        if (!entry.Value.GetType().Equals(typeof(string))) return;
+
+                        string Key = entry.Key.ToString(),
+                               Value = (string) entry.Value;
+
+                        try
+                        {
+                            Control c = Controls.Find(Key, true).SingleOrDefault();
+                            c.Text = Value;
+                        }
+                        catch
+                        {
+                            Console.WriteLine("Control {0} is null in form {1}!", Key, GetType().Name);
+                        }
+                    }
 
                     this.culture = value;
                     this.OnCultureChanged();
@@ -47,30 +73,37 @@ namespace LiteLerped_WF_API.Controls
 
         public LocalizedForm()
         {
-            this.resManager = new ComponentResourceManager(this.GetType());
-            this.culture = CultureInfo.CurrentUICulture;
+            //this.culture = CultureInfo.CurrentUICulture;
 
-            MenuStrip menu = this.Controls.OfType<MenuStrip>().SingleOrDefault();
-            //Console.WriteLine("Null:: " + (this.Controls.Cast<Control>().SingleOrDefault(x => x.Name == "menuStrip1") == null));
-            //typeof(LocalizedForm).GetAllDerivedClasses().ForEach(x => Console.WriteLine(x.TryGetFormByType<LocalizedForm>() == null ? "Null::Null" : x.TryGetFormByType<LocalizedForm>().Name));
-            if (menu != null)
-                LanguageManager.AttachMenu(menu);
-        }
+            //Set Localizable to true
 
-        private void ApplyResources(Control parent, CultureInfo culture)
-        {
-            this.resManager.ApplyResources(parent, parent.Name, culture);
-
-            foreach (Control ctl in parent.IterateAllChildren()) //parent.GetAll(typeof(Label)))
+            Shown += (sender, e) =>
             {
-                //this.ApplyResources(ctl, culture);
-                this.resManager.ApplyResources(ctl, ctl.Name, culture);
-            }
+                MenuStrip menu = null;
+                if (HasValidMenu(GetType().Name, out menu))
+                    LanguageManager.AttachMenu(menu);
+            };
         }
 
         protected void OnCultureChanged()
         {
             this.CultureChanged?.Invoke(this, EventArgs.Empty);
+        }
+
+        protected bool HasValidMenu(string name, out MenuStrip menu)
+        {
+            Console.WriteLine("Attaching a menu to " + name);
+
+            try
+            {
+                menu = Controls.OfType<MenuStrip>().SingleOrDefault(x => x.Dock == DockStyle.Top);
+                return menu != null;
+            }
+            catch
+            {
+                menu = null;
+                return false;
+            }
         }
     }
 }
