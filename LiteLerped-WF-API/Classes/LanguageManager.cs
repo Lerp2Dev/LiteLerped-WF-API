@@ -1,7 +1,11 @@
 ﻿using LiteLerped_WF_API.Controls;
 using System;
+using System.Collections;
+using System.ComponentModel;
 using System.Globalization;
 using System.Linq;
+using System.Reflection;
+using System.Resources;
 using System.Threading;
 using System.Windows.Forms;
 
@@ -22,7 +26,7 @@ namespace LiteLerped_WF_API.Classes
             {
                 if (GlobalUICulture.Equals(value) == false)
                 {
-                    foreach (var form in Application.OpenForms.OfType<LocalizedForm>())
+                    foreach (LocalizedForm form in Application.OpenForms.OfType<LocalizedForm>())
                         form.Culture = value;
 
                     Thread.CurrentThread.CurrentUICulture = value;
@@ -45,11 +49,11 @@ namespace LiteLerped_WF_API.Classes
             }
         }*/
 
-        public LanguageManager(MenuStrip menu, LerpedLanguage def)
-            : this(menu, def.ToString().ToLower())
+        public LanguageManager(LerpedLanguage def)
+            : this(def.ToString().ToLower())
         { }
 
-        internal LanguageManager(MenuStrip menu, string def) //string baseName, Action<LerpedLanguage> act
+        internal LanguageManager(string def) //string baseName, Action<LerpedLanguage> act //MenuStrip menu,
         {
             //this.baseName = baseName;
 
@@ -61,23 +65,34 @@ namespace LiteLerped_WF_API.Classes
                 act(lang);
             };*/
 
-            GlobalUICulture = new CultureInfo(def);
-            AttachMenu(menu);
+            GlobalUICulture = CultureInfo.GetCultureInfo(def);
+            //AttachMenu(menu);
         }
 
         public static void AttachMenu(MenuStrip menu)
         {
+            string s_Name = "m_LangMan";
+            if (menu.Items.Cast<ToolStripMenuItem>().Any(x => x.Name == s_Name))
+                return;
+
             ToolStripDropDownItem item = new ToolStripMenuItem("Language"); // <--- Esto lo tengo que cargar de algún sitio...
+            item.Name = s_Name;
 
             foreach (LerpedLanguage lang in Enum.GetValues(typeof(LerpedLanguage)))
             {
-                ToolStripDropDownItem langItem = new ToolStripMenuItem(LanguageName(lang));
-                langItem.Tag = lang.ToString().ToLower();
-                langItem.Click += (sender, e) =>
+                foreach (LocalizedForm form in Application.OpenForms.OfType<LocalizedForm>())
                 {
-                    GlobalUICulture = new CultureInfo((string) ((ToolStripDropDownItem) sender).Tag);
-                };
-                item.DropDownItems.Add(langItem);
+                    ToolStripDropDownItem langItem = new ToolStripMenuItem(LanguageName(lang));
+                    langItem.Tag = lang.ToString().ToLower();
+                    langItem.Click += (sender, e) =>
+                    {
+                        GlobalUICulture = new CultureInfo((string) ((ToolStripDropDownItem) sender).Tag);
+                        //Thread.CurrentThread.CurrentUICulture = new CultureInfo((string) ((ToolStripDropDownItem) sender).Tag);
+                        //form.Controls.Clear();
+                        //form.InitializeComponent();
+                    };
+                    item.DropDownItems.Add(langItem);
+                }
             }
 
             menu.Items.Add(item);
@@ -88,12 +103,55 @@ namespace LiteLerped_WF_API.Classes
             switch (lang)
             {
                 case LerpedLanguage.EN:
-                    return "Inglés111";
+                    return "English";
 
                 case LerpedLanguage.ES:
-                    return "Español222";
+                    return "Spanish";
             }
             return "";
+        }
+
+        public static void ChangeLanguage(string lang)
+        {
+            Console.WriteLine("Changing lang to " + lang);
+            //Thread.CurrentThread.CurrentCulture = CultureInfo.CreateSpecificCulture(lang);
+            //Thread.CurrentThread.CurrentUICulture = CultureInfo.CreateSpecificCulture(lang);
+
+            /*string[] resourceNames = Assembly.GetExecutingAssembly().GetManifestResourceNames();
+            foreach (string resourceName in resourceNames)
+            {
+                Console.WriteLine("Res name: " + resourceName);
+            }*/
+
+            /*ResourceSet resourceSet = new ComponentResourceManager(typeof(frmCredentials)).GetResourceSet(CultureInfo.CreateSpecificCulture(lang), true, true);
+            foreach (DictionaryEntry entry in resourceSet)
+            {
+                string resourceKey = entry.Key.ToString();
+                object resource = entry.Value; //resourceSet.GetString(resourceKey);
+                if (resource.GetType().Equals(typeof(string)))
+                    Console.WriteLine("Key: {0}\nValue: {1}\n\n", resourceKey, (string) resource);
+            }*/
+
+            //foreach (Form frm in Application.OpenForms)
+            //    LocalizeForm(frm);
+        }
+
+        private static void LocalizeForm(Form frm)
+        {
+            //Console.WriteLine(frm.Name);
+            var manager = new ComponentResourceManager(frm.GetType());
+            manager.ApplyResources(frm, "$this");
+            ApplyResources(manager, frm.Controls);
+        }
+
+        private static void ApplyResources(ComponentResourceManager manager, Control.ControlCollection ctls)
+        {
+            foreach (Control ctl in ctls)
+            {
+                //Console.WriteLine("Control: {0} ({1})", ctl.Name, ctl.GetType().Name);
+                manager.ApplyResources(ctl, ctl.Name);
+                ApplyResources(manager, ctl.Controls);
+            }
         }
 
         /*public string GetString(string str)

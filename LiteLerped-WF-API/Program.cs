@@ -1,5 +1,7 @@
 ﻿using LiteLerped_WF_API.Classes;
 using System;
+using System.Globalization;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace LiteLerped_WF_API
@@ -16,6 +18,8 @@ namespace LiteLerped_WF_API
         [STAThread]
         private static void Main()
         {
+            //Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo("es");
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 

@@ -1,6 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\packages\MSBuild.ILMerge.Task.1.0.5\build\MSBuild.ILMerge.Task.props" Condition="Exists('..\packages\MSBuild.ILMerge.Task.1.0.5\build\MSBuild.ILMerge.Task.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -58,9 +57,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\Extensions\ReflectionExtensions.cs" />
     <Compile Include="Controls\Captcha.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="Controls\Extensions\ControlExtensions.cs" />
     <Compile Include="Controls\ExTextBox.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -70,16 +71,28 @@
     <Compile Include="Controls\NotifyLabel.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="Classes\LanguageManager.cs" />
     <Compile Include="Forms\Credentials\frmCredentials.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\Credentials\frmCredentials.Designer.cs">
       <DependentUpon>frmCredentials.cs</DependentUpon>
     </Compile>
-    <Compile Include="Classes\LanguageManager.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Controls\LocalizedForm.resx">
+      <DependentUpon>LocalizedForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Credentials\frmCredentials.de.resx">
+      <DependentUpon>frmCredentials.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Credentials\frmCredentials.en.resx">
+      <DependentUpon>frmCredentials.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Credentials\frmCredentials.es.resx">
+      <DependentUpon>frmCredentials.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Credentials\frmCredentials.fr.resx">
       <DependentUpon>frmCredentials.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Credentials\frmCredentials.resx">
@@ -103,8 +116,6 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Res.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="ILMerge.props" />
-    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -124,18 +135,9 @@
     <Folder Include="Forms\Updater\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="ILMergeOrder.txt" />
     <Content Include="Properties\Credentials\refresh-20.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
-    <PropertyGroup>
-      <ErrorText>Este proyecto hace referencia a los paquetes NuGet que faltan en este equipo. Use la restauración de paquetes NuGet para descargarlos. Para obtener más información, consulte http://go.microsoft.com/fwlink/?LinkID=322105. El archivo que falta es {0}.</ErrorText>
-    </PropertyGroup>
-    <Error Condition="!Exists('..\packages\MSBuild.ILMerge.Task.1.0.5\build\MSBuild.ILMerge.Task.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\MSBuild.ILMerge.Task.1.0.5\build\MSBuild.ILMerge.Task.props'))" />
-    <Error Condition="!Exists('..\packages\MSBuild.ILMerge.Task.1.0.5\build\MSBuild.ILMerge.Task.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\MSBuild.ILMerge.Task.1.0.5\build\MSBuild.ILMerge.Task.targets'))" />
-  </Target>
-  <Import Project="..\packages\MSBuild.ILMerge.Task.1.0.5\build\MSBuild.ILMerge.Task.targets" Condition="Exists('..\packages\MSBuild.ILMerge.Task.1.0.5\build\MSBuild.ILMerge.Task.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

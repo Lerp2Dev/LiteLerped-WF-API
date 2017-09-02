@@ -25,7 +25,7 @@ namespace LiteLerped_WF_API.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("EN")]
+        [global::System.Configuration.DefaultSettingValueAttribute("es")]
         public string DefaultLanguage {
             get {
                 return ((string)(this["DefaultLanguage"]));

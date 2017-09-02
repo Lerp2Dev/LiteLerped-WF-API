@@ -5,6 +5,7 @@ using LiteLerped_WF_API.Properties;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading;
@@ -70,7 +71,7 @@ namespace LiteLerped_WF_API
                 Login(doLogin); //Este no funciona muy bien...
             }
 
-            Program.lang = new LanguageManager(menuStrip1, Settings.Default.DefaultLanguage); //typeof(Program).Namespace + ".Properties.Lang.Credentials",
+            Program.lang = new LanguageManager(Settings.Default.DefaultLanguage); //typeof(Program).Namespace + ".Properties.Lang.Credentials",
             //Program.lang.Switch((LerpedLanguage) Enum.Parse(typeof(LerpedLanguage), Settings.Default.DefaultLanguage));
 
             pictureBox1.Key = GoogleKey;
@@ -218,6 +219,34 @@ namespace LiteLerped_WF_API
         private void frmCredentials_FormClosing(object sender, FormClosingEventArgs e)
         {
             //...
+        }
+
+        private void englishToolStripMenuItem_Click_1(object sender, EventArgs e)
+        {
+            string lang = (string) ((ToolStripMenuItem) sender).Tag;
+            LanguageManager.ChangeLanguage(lang);
+            base.Culture = CultureInfo.GetCultureInfo(lang);
+        }
+
+        private void spanishToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string lang = (string) ((ToolStripMenuItem) sender).Tag;
+            LanguageManager.ChangeLanguage("es");
+            base.Culture = CultureInfo.GetCultureInfo(lang);
+        }
+
+        private void frenchToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string lang = (string) ((ToolStripMenuItem) sender).Tag;
+            LanguageManager.ChangeLanguage(lang);
+            base.Culture = CultureInfo.GetCultureInfo(lang);
+        }
+
+        private void germanToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string lang = (string) ((ToolStripMenuItem) sender).Tag;
+            LanguageManager.ChangeLanguage(lang);
+            base.Culture = CultureInfo.GetCultureInfo(lang);
         }
 
         private void Register()

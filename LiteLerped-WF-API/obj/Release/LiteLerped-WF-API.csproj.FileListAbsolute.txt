@@ -1,4 +1,3 @@
-D:\LERP2DEV\Lerp2Dev Visual Studio\LiteLerped-WF-API\LiteLerped-WF-API\obj\Release\LiteLerped-WF-API.csprojResolveAssemblyReference.cache
 D:\LERP2DEV\Lerp2Dev Visual Studio\LiteLerped-WF-API\LiteLerped-WF-API\obj\Release\LiteLerped_WF_API.frmCredentials.resources
 D:\LERP2DEV\Lerp2Dev Visual Studio\LiteLerped-WF-API\LiteLerped-WF-API\obj\Release\LiteLerped_WF_API.Properties.Resources.resources
 D:\LERP2DEV\Lerp2Dev Visual Studio\LiteLerped-WF-API\LiteLerped-WF-API\obj\Release\LiteLerped-WF-API.csproj.GenerateResource.Cache
@@ -7,3 +6,14 @@ D:\LERP2DEV\Lerp2Dev Visual Studio\LiteLerped-WF-API\LiteLerped-WF-API\obj\Relea
 D:\LERP2DEV\Lerp2Dev Visual Studio\LiteLerped-WF-API\LiteLerped-WF-API\obj\Release\LiteLerped-WF-API.pdb
 D:\LERP2DEV\Lerp2Dev Visual Studio\LiteLerped-WF-API\LiteLerped-WF-API\obj\Release\LiteLerped_WF_API.Properties.Credentials.Res.resources
 D:\LERP2DEV\Lerp2Dev Visual Studio\LiteLerped-WF-API\LiteLerped-WF-API\obj\Release\LiteLerped_WF_API.frmCredentials.es.resources
+D:\LERP2DEV\Lerp2Dev Visual Studio\LiteLerped-WF-API\LiteLerped-WF-API\obj\Release\LiteLerped_WF_API.Controls.LocalizedForm.resources
+D:\LERP2DEV\Lerp2Dev Visual Studio\LiteLerped-WF-API\LiteLerped-WF-API\obj\Release\LiteLerped-WF-API.csprojResolveAssemblyReference.cache
+D:\LERP2DEV\Lerp2Dev Visual Studio\LiteLerped-WF-API\LiteLerped-WF-API\obj\Release\LiteLerped_WF_API.frmCredentials.en.resources
+D:\LERP2DEV\Lerp2Dev Visual Studio\LiteLerped-WF-API\LiteLerped-WF-API\obj\Release\en\LiteLerped-WF-API.resources.dll
+D:\LERP2DEV\Lerp2Dev Visual Studio\LiteLerped-WF-API\LiteLerped-WF-API\bin\Release\LiteLerped-WF-API.dll.config
+D:\LERP2DEV\Lerp2Dev Visual Studio\LiteLerped-WF-API\LiteLerped-WF-API\bin\Release\LiteLerped-WF-API.dll
+D:\LERP2DEV\Lerp2Dev Visual Studio\LiteLerped-WF-API\LiteLerped-WF-API\bin\Release\LiteLerped-WF-API.pdb
+D:\LERP2DEV\Lerp2Dev Visual Studio\LiteLerped-WF-API\LiteLerped-WF-API\bin\Release\en\LiteLerped-WF-API.resources.dll
+D:\LERP2DEV\Lerp2Dev Visual Studio\LiteLerped-WF-API\LiteLerped-WF-API\bin\Release\es\LiteLerped-WF-API.resources.dll
+D:\LERP2DEV\Lerp2Dev Visual Studio\LiteLerped-WF-API\LiteLerped-WF-API\bin\Release\Lerp2Web.dll
+D:\LERP2DEV\Lerp2Dev Visual Studio\LiteLerped-WF-API\LiteLerped-WF-API\bin\Release\Lerp2Web.pdb
