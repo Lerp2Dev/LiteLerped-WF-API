@@ -10,6 +10,11 @@ using System.Windows.Forms;
 
 namespace LiteLerped_WF_API.Controls
 {
+    /// <summary>
+    /// Class LerpedForm.
+    /// This forms will server the Launguage & Auth system!
+    /// </summary>
+    /// <seealso cref="System.Windows.Forms.Form" />
     public class LerpedForm : Form
     {
         /// <summary>
@@ -22,6 +27,7 @@ namespace LiteLerped_WF_API.Controls
         public event EventHandler CultureChanged;
 
         protected CultureInfo culture;
+
         //protected ComponentResourceManager resManager;
 
         /// <summary>
@@ -73,13 +79,12 @@ namespace LiteLerped_WF_API.Controls
         {
             //this.culture = CultureInfo.CurrentUICulture;
 
-            //Set Localizable to true
+            //Set Localizable to true (no se puede es private)
 
             Shown += (sender, e) =>
             {
-                MenuStrip menu = null;
-                if (HasValidMenu(GetType().Name, out menu))
-                    LanguageManager.AttachMenu(menu);
+                if (!DesignMode)
+                    LerpedManager.ManageMenu(this);
             };
         }
 
@@ -88,20 +93,17 @@ namespace LiteLerped_WF_API.Controls
             this.CultureChanged?.Invoke(this, EventArgs.Empty);
         }
 
-        protected bool HasValidMenu(string name, out MenuStrip menu)
+        private void InitializeComponent()
         {
-            Console.WriteLine("Attaching a menu to " + name);
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LerpedForm));
+            this.SuspendLayout();
+            // 
+            // LerpedForm
+            // 
+            resources.ApplyResources(this, "$this");
+            this.Name = "LerpedForm";
+            this.ResumeLayout(false);
 
-            try
-            {
-                menu = Controls.OfType<MenuStrip>().SingleOrDefault(x => x.Dock == DockStyle.Top);
-                return menu != null;
-            }
-            catch
-            {
-                menu = null;
-                return false;
-            }
         }
     }
 }

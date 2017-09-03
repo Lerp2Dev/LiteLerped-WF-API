@@ -7,7 +7,6 @@ D:\LERP2DEV\Lerp2Dev Visual Studio\LiteLerped-WF-API\LiteLerped-WF-API\bin\Debug
 D:\LERP2DEV\Lerp2Dev Visual Studio\LiteLerped-WF-API\LiteLerped-WF-API\bin\Debug\fr\LiteLerped-WF-API.resources.dll
 D:\LERP2DEV\Lerp2Dev Visual Studio\LiteLerped-WF-API\LiteLerped-WF-API\bin\Debug\Lerp2Web.dll
 D:\LERP2DEV\Lerp2Dev Visual Studio\LiteLerped-WF-API\LiteLerped-WF-API\bin\Debug\Lerp2Web.pdb
-D:\LERP2DEV\Lerp2Dev Visual Studio\LiteLerped-WF-API\LiteLerped-WF-API\obj\Debug\LiteLerped_WF_API.Controls.LocalizedForm.resources
 D:\LERP2DEV\Lerp2Dev Visual Studio\LiteLerped-WF-API\LiteLerped-WF-API\obj\Debug\LiteLerped_WF_API.frmCredentials.resources
 D:\LERP2DEV\Lerp2Dev Visual Studio\LiteLerped-WF-API\LiteLerped-WF-API\obj\Debug\LiteLerped_WF_API.Properties.Resources.resources
 D:\LERP2DEV\Lerp2Dev Visual Studio\LiteLerped-WF-API\LiteLerped-WF-API\obj\Debug\LiteLerped_WF_API.Properties.Credentials.Res.resources
@@ -23,3 +22,4 @@ D:\LERP2DEV\Lerp2Dev Visual Studio\LiteLerped-WF-API\LiteLerped-WF-API\obj\Debug
 D:\LERP2DEV\Lerp2Dev Visual Studio\LiteLerped-WF-API\LiteLerped-WF-API\obj\Debug\LiteLerped-WF-API.dll
 D:\LERP2DEV\Lerp2Dev Visual Studio\LiteLerped-WF-API\LiteLerped-WF-API\obj\Debug\LiteLerped-WF-API.pdb
 D:\LERP2DEV\Lerp2Dev Visual Studio\LiteLerped-WF-API\LiteLerped-WF-API\obj\Debug\LiteLerped-WF-API.csprojResolveAssemblyReference.cache
+D:\LERP2DEV\Lerp2Dev Visual Studio\LiteLerped-WF-API\LiteLerped-WF-API\obj\Debug\LiteLerped_WF_API.Controls.LerpedForm.resources

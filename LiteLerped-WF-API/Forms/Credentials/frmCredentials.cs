@@ -5,7 +5,6 @@ using LiteLerped_WF_API.Properties;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Drawing;
-using System.Globalization;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading;
@@ -14,7 +13,7 @@ using Timer = System.Windows.Forms.Timer;
 
 namespace LiteLerped_WF_API
 { //Este namespace tiene que ser distinto
-    public partial class frmCredentials : LocalizedForm
+    public partial class frmCredentials : LerpedForm
     {
         public const string GoogleKey = "6LexLsMSAAAAABUuI6bvUYfxaumgcu0vGiEFotDA",
                             ValidNicknameChars = "ABCDEFGHIJKLMNÑOPQRSTUVWXYZabcdefghijklmnñopqrstuvwxyz0123456789.-_";
@@ -52,7 +51,7 @@ namespace LiteLerped_WF_API
             }
         }
 
-        internal static Action doLogin;
+        internal static Action<bool> doLogin;
 
         public frmCredentials()
         {
@@ -73,7 +72,7 @@ namespace LiteLerped_WF_API
             if (doingAutologin)
             {
                 Console.WriteLine("Auto login ready!!");
-                Login(doLogin); //Este no funciona muy bien...
+                Login(doLogin, true); //Este no funciona muy bien...
             }
 
             //typeof(Program).Namespace + ".Properties.Lang.Credentials",
@@ -130,10 +129,16 @@ namespace LiteLerped_WF_API
 
         public static void SetLoginCallback<T>(T frm) where T : Form
         {
-            doLogin = () =>
+            doLogin = (autoLogin) =>
             {
                 //El frmMain no se puede usar aqui
-                frm.Show();
+
+                //Aqui se deberia saber a partir del localized form si se va a ejecutar el Auth, y si se ejecuta entonces hacer un main.Hide()
+
+                if (autoLogin)
+                    frm.Show();
+                else
+                    Program.cred.Show();
 
                 Program.cred.checkAuth = new Timer();
                 Program.cred.checkAuth.Tick += Program.cred.CheckAuth_Tick;
@@ -143,7 +148,7 @@ namespace LiteLerped_WF_API
                 //Append here language menu
                 //Append also the logout menu
 
-                Application.OpenForms["frmCredentials"].Hide();
+                //Application.OpenForms["frmCredentials"].Hide();
             };
         }
 
@@ -158,7 +163,7 @@ namespace LiteLerped_WF_API
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Login(doLogin);
+            Login(doLogin, false);
         }
 
         private void CheckAuth_Tick(object sender, EventArgs e)
@@ -176,7 +181,7 @@ namespace LiteLerped_WF_API
             Register();
         }
 
-        private void Login(Action act)
+        private void Login(Action<bool> act, bool autoLogin)
         {
             /*if (txtUsername.CheckError() ||
                 txtPassword.CheckError())
@@ -187,7 +192,7 @@ namespace LiteLerped_WF_API
                 API.config.Save();
             //Now, do the login...
             if (Program.web.CreateAuth(txtUsername.Text, txtPassword.Text.CreateMD5()) != -1)
-                act();
+                act(autoLogin);
         }
 
         private void txtUsername_Leave(object sender, EventArgs e)
@@ -233,7 +238,7 @@ namespace LiteLerped_WF_API
                 return;
             }
             //Interpretar este resultado como un JObject y si hay errores pos no proseguir... Y si es todo correcto mostrar un messagebox alertando de que todo ha ido bien
-            JObject obj = Program.web.JPost(new ActionRequest("register")
+            JObject obj = Lerp2Web.Lerp2Web.JPost(new ActionRequest("register")
             {
                 { "username", txtRegisterUsername.Text },
                 { "password", txtRegisterPassword.Text },
@@ -241,6 +246,10 @@ namespace LiteLerped_WF_API
             });
             if (obj["success"].ToObject<int>() == (int) PHPSuccess.Register)
                 MessageBox.Show(string.Format("A new account '{0}' has been succesfully registered!", txtRegisterUsername.Text));
+        }
+
+        public void Logout()
+        {
         }
 
         private void ResizeForm(int selectedIndex)
@@ -260,16 +269,6 @@ namespace LiteLerped_WF_API
                 default:
                     return;
             }
-        }
-
-        private void SwitchLang(LerpedLanguage lng)
-        {
-            Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo(lng.ToString().ToLower());
-            /*languageToolStripMenuItem.Text = Program.lang.GetString("languageMenu");
-            tabLogin.Text = Program.lang.GetString("tabLogin");
-            tabRegister.Text = Program.lang.GetString("tabRegister");
-            button1.Text = Program.lang.GetString("tabLogin");
-            button2.Text = Program.lang.GetString("tabRegister");*/
         }
     }
 }

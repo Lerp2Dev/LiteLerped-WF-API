@@ -58,6 +58,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Classes\Extensions\ReflectionExtensions.cs" />
+    <Compile Include="Classes\LerpedManager.cs" />
     <Compile Include="Controls\Captcha.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -65,7 +66,7 @@
     <Compile Include="Controls\ExTextBox.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\LocalizedForm.cs">
+    <Compile Include="Controls\LerpedForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Controls\NotifyLabel.cs">
@@ -80,8 +81,8 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Controls\LocalizedForm.resx">
-      <DependentUpon>LocalizedForm.cs</DependentUpon>
+    <EmbeddedResource Include="Controls\LerpedForm.resx">
+      <DependentUpon>LerpedForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Credentials\frmCredentials.de.resx">
       <DependentUpon>frmCredentials.cs</DependentUpon>
@@ -136,6 +137,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Properties\Credentials\refresh-20.png" />
+    <Content Include="TODO.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

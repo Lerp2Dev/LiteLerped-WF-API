@@ -1,11 +1,7 @@
 ﻿using LiteLerped_WF_API.Controls;
 using System;
-using System.Collections;
-using System.ComponentModel;
 using System.Globalization;
 using System.Linq;
-using System.Reflection;
-using System.Resources;
 using System.Threading;
 using System.Windows.Forms;
 
@@ -26,7 +22,7 @@ namespace LiteLerped_WF_API.Classes
             {
                 if (GlobalUICulture.Equals(value) == false)
                 {
-                    foreach (LocalizedForm form in Application.OpenForms.OfType<LocalizedForm>())
+                    foreach (LerpedForm form in Application.OpenForms.OfType<LerpedForm>())
                         form.Culture = value;
 
                     Thread.CurrentThread.CurrentUICulture = value;
@@ -56,35 +52,6 @@ namespace LiteLerped_WF_API.Classes
         internal LanguageManager(string def) //string baseName, Action<LerpedLanguage> act //MenuStrip menu,
         {
             GlobalUICulture = CultureInfo.GetCultureInfo(def);
-        }
-
-        public static void AttachMenu(MenuStrip menu)
-        {
-            string s_Name = "m_LangMan";
-            if (menu.Items.Cast<ToolStripMenuItem>().Any(x => x.Name == s_Name))
-                return;
-
-            ToolStripDropDownItem item = new ToolStripMenuItem("Language"); // <--- Esto lo tengo que cargar de algún sitio...
-            item.Name = s_Name;
-
-            foreach (LerpedLanguage lang in Enum.GetValues(typeof(LerpedLanguage)))
-            {
-                foreach (LocalizedForm form in Application.OpenForms.OfType<LocalizedForm>())
-                {
-                    ToolStripDropDownItem langItem = new ToolStripMenuItem(LanguageName(lang));
-                    langItem.Tag = lang.ToString().ToLower();
-                    langItem.Click += (sender, e) =>
-                    {
-                        GlobalUICulture = new CultureInfo((string) ((ToolStripDropDownItem) sender).Tag);
-                        //Thread.CurrentThread.CurrentUICulture = new CultureInfo((string) ((ToolStripDropDownItem) sender).Tag);
-                        //form.Controls.Clear();
-                        //form.InitializeComponent();
-                    };
-                    item.DropDownItems.Add(langItem);
-                }
-            }
-
-            menu.Items.Add(item);
         }
 
         internal static string LanguageName(LerpedLanguage lang)

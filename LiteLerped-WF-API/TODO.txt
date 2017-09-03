@@ -1,0 +1,15 @@
+﻿Cosas que me quedan por ahcer:
+
+Trabajar en los lenguages de los menus y de todo lo que no esté en el form
+Hacer la funcion logout del frmCredentials
+
+Arreglar lo del attach menu duplicado
+Hacer funcionar lo de los idiomas en una merged Assembly (ILRepack)
+Traducir todo correctamente
+Hacer que desde un XML o un INI se pueda convertir a un RESX para luego hacer una DLL en otro idioma
+Hacer que el login se oculte cuando haya que hacer un autologin
+
+Injectar más menus (a los localizableform) para los demás forms
+Hacer los forms que faltan: Consola, Idiomas, Updater
+
+No se si eso de localizable form es lo mejor, pero bueno, al menos ayudar a decir que está traducido, no que formen parte de la API de Lerp2Dev (LerpedForm quizás)
