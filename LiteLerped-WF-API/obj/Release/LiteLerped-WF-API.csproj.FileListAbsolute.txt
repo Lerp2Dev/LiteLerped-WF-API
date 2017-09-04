@@ -21,3 +21,4 @@ D:\LERP2DEV\Lerp2Dev Visual Studio\LiteLerped-WF-API\LiteLerped-WF-API\obj\Relea
 D:\LERP2DEV\Lerp2Dev Visual Studio\LiteLerped-WF-API\LiteLerped-WF-API\obj\Release\LiteLerped_WF_API.frmCredentials.fr.resources
 D:\LERP2DEV\Lerp2Dev Visual Studio\LiteLerped-WF-API\LiteLerped-WF-API\obj\Release\de\LiteLerped-WF-API.resources.dll
 D:\LERP2DEV\Lerp2Dev Visual Studio\LiteLerped-WF-API\LiteLerped-WF-API\obj\Release\fr\LiteLerped-WF-API.resources.dll
+D:\LERP2DEV\Lerp2Dev Visual Studio\LiteLerped-WF-API\LiteLerped-WF-API\obj\Release\LiteLerped-WF-API.csprojResolveAssemblyReference.cache
