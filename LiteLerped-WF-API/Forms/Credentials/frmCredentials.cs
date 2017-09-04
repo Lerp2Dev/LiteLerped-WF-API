@@ -1,13 +1,12 @@
 ﻿using Lerp2Web;
+using Lerp2Web.Properties;
 using LiteLerped_WF_API.Classes;
 using LiteLerped_WF_API.Controls;
-using LiteLerped_WF_API.Properties;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Drawing;
 using System.Linq;
 using System.Text.RegularExpressions;
-using System.Threading;
 using System.Windows.Forms;
 using Timer = System.Windows.Forms.Timer;
 
@@ -57,7 +56,7 @@ namespace LiteLerped_WF_API
         {
             Shown += (sender, e) =>
             {
-                Program.lang = new LanguageManager(Settings.Default.DefaultLanguage);
+                Program.lang = new LanguageManager(ManagedSettings.CurrentLanguage);
             };
 
             InitializeComponent();
@@ -76,7 +75,7 @@ namespace LiteLerped_WF_API
             }
 
             //typeof(Program).Namespace + ".Properties.Lang.Credentials",
-            //Program.lang.Switch((LerpedLanguage) Enum.Parse(typeof(LerpedLanguage), Settings.Default.DefaultLanguage));
+            //Program.lang.Switch((LerpedLanguage) Enum.Parse(typeof(LerpedLanguage), ManagedSettings.DefaultLanguage));
 
             pictureBox1.Key = GoogleKey;
 
@@ -198,13 +197,13 @@ namespace LiteLerped_WF_API
         private void txtUsername_Leave(object sender, EventArgs e)
         {
             ExTextBox username = ((ExTextBox) sender);
-            ConfigCore.Settings[ConfigKeys.usernameConfig].Value = username.Text;
+            ManagedSettings.LoginUsername = username.Text;
         }
 
         private void txtPassword_Leave(object sender, EventArgs e)
         {
             ExTextBox password = ((ExTextBox) sender);
-            ConfigCore.Settings[ConfigKeys.passwordConfig].Value = password.Text;
+            ManagedSettings.LoginPassword = password.Text;
         }
 
         private void chkRemember_CheckedChanged(object sender, EventArgs e)
@@ -214,11 +213,6 @@ namespace LiteLerped_WF_API
                 txtUsername.Enabled = !isRemembered;
             if (!string.IsNullOrWhiteSpace(txtPassword.Text))
                 txtPassword.Enabled = !isRemembered;
-        }
-
-        private void frmCredentials_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            API.config.Save(); //Save althrough is was already saved
         }
 
         private void Register()

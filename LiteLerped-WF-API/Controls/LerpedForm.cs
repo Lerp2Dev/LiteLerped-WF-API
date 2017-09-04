@@ -1,4 +1,6 @@
-﻿using LiteLerped_WF_API.Classes;
+﻿using Lerp2Web;
+using Lerp2Web.Properties;
+using LiteLerped_WF_API.Classes;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -86,6 +88,13 @@ namespace LiteLerped_WF_API.Controls
                 if (!DesignMode)
                     LerpedManager.ManageMenu(this);
             };
+            FormClosing += (sender, e) =>
+            {
+                ConfigCore.Exiting(() =>
+                {
+                    ManagedSettings.Save();
+                });
+            };
         }
 
         protected void OnCultureChanged()
@@ -97,13 +106,12 @@ namespace LiteLerped_WF_API.Controls
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LerpedForm));
             this.SuspendLayout();
-            // 
+            //
             // LerpedForm
-            // 
+            //
             resources.ApplyResources(this, "$this");
             this.Name = "LerpedForm";
             this.ResumeLayout(false);
-
         }
     }
 }

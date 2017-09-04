@@ -1,4 +1,5 @@
 ﻿using Lerp2Web;
+using Lerp2Web.Properties;
 using LiteLerped_WF_API.Classes;
 using System;
 using System.Windows.Forms;
@@ -29,13 +30,13 @@ namespace LiteLerped_WF_API
             API.LoadConfigCallback(() =>
             {
                 Console.WriteLine("Config callback!!");
-                if (!ConfigCore.Settings.IsEmpty(ConfigKeys.usernameConfig))
-                    cred.a_txtUsername.Text = ConfigCore.Settings[ConfigKeys.usernameConfig].Value;
+                if (!string.IsNullOrEmpty(ManagedSettings.LoginUsername))
+                    cred.a_txtUsername.Text = ManagedSettings.LoginUsername;
 
-                if (!ConfigCore.Settings.IsEmpty(ConfigKeys.passwordConfig))
-                    cred.a_txtPassword.Text = ConfigCore.Settings[ConfigKeys.passwordConfig].Value;
+                if (!string.IsNullOrEmpty(ManagedSettings.LoginPassword))
+                    cred.a_txtPassword.Text = ManagedSettings.LoginPassword;
 
-                cred.doingAutologin = !ConfigCore.Settings.IsEmpty(ConfigKeys.usernameConfig) && !ConfigCore.Settings.IsEmpty(ConfigKeys.passwordConfig);
+                cred.doingAutologin = !string.IsNullOrEmpty(ManagedSettings.LoginUsername) && !string.IsNullOrEmpty(ManagedSettings.LoginPassword);
                 cred.a_chkRemember.Checked = API.RememberingAuth;
             });
             API.LoadConfig(firstConfigExecution);

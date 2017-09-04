@@ -1,4 +1,4 @@
-﻿using Lerp2Web;
+﻿using Lerp2Web.Properties;
 using LiteLerped_WF_API.Controls;
 using System;
 using System.Globalization;
@@ -72,8 +72,8 @@ namespace LiteLerped_WF_API.Classes
         {
             string lang = (string) ((ToolStripDropDownItem) sender).Tag;
             GlobalUICulture = new CultureInfo(lang);
-            ConfigCore.Settings[ConfigKeys.currentLanguage].Value = lang;
-            API.config.Save();
+            ManagedSettings.CurrentLanguage = lang;
+            ManagedSettings.Save();
         }
     }
 

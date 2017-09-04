@@ -303,7 +303,6 @@ namespace LiteLerped_WF_API
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "frmCredentials";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmCredentials_FormClosing);
             this.Load += new System.EventHandler(this.LerpedCredentials_Load);
             this.tabControl1.ResumeLayout(false);
             this.tabLogin.ResumeLayout(false);
