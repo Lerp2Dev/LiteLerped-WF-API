@@ -13,3 +13,12 @@ Injectar más menus (a los localizableform) para los demás forms
 Hacer los forms que faltan: Consola, Idiomas, Updater
 
 No se si eso de localizable form es lo mejor, pero bueno, al menos ayudar a decir que está traducido, no que formen parte de la API de Lerp2Dev (LerpedForm quizás)
+
+ver de donde viene ste error:
+
+Gravedad	Código	Descripción	Proyecto	Archivo	Línea	Estado de supresión
+Error		Error inesperado en la tarea "ILRepack".
+System.Exception: Unable to resolve assembly 'bin\Release\\LiteLerped-WF-API.exe'
+   en ILRepack.Lib.MSBuild.Task.ILRepack.Execute()
+   en Microsoft.Build.BackEnd.TaskExecutionHost.Microsoft.Build.BackEnd.ITaskExecutionHost.Execute()
+   en Microsoft.Build.BackEnd.TaskBuilder.<ExecuteInstantiatedTask>d__26.MoveNext()	LiteLerped-WF-API			

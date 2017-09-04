@@ -1,4 +1,5 @@
-﻿using LiteLerped_WF_API.Controls;
+﻿using Lerp2Web;
+using LiteLerped_WF_API.Controls;
 using System;
 using System.Drawing;
 using System.Globalization;
@@ -50,10 +51,7 @@ namespace LiteLerped_WF_API.Classes
                 {
                     ToolStripDropDownItem langItem = new ToolStripMenuItem(LanguageManager.LanguageName(lang));
                     langItem.Tag = lang.ToString().ToLower();
-                    langItem.Click += (sender, e) =>
-                    {
-                        LanguageManager.GlobalUICulture = new CultureInfo((string) ((ToolStripDropDownItem) sender).Tag);
-                    };
+                    langItem.Click += LanguageManager.LangItem_Click;
                     languageItem.DropDownItems.Add(langItem);
                 }
 
@@ -64,7 +62,11 @@ namespace LiteLerped_WF_API.Classes
 
             string cap = "Options";
             ToolStripDropDownItem _optItem = menu.Items.Cast<ToolStripMenuItem>().SingleOrDefault(x => x.Text == cap);
-            ToolStripDropDownItem optionItem = new ToolStripMenuItem(cap);
+
+            if (_optItem != null)
+                _optItem.DropDownItems.Add(new ToolStripSeparator());
+
+            ToolStripDropDownItem optionItem = _optItem == null ? new ToolStripMenuItem(cap) : _optItem;
 
             ToolStripDropDownItem logoutOption = new ToolStripMenuItem("Logout");
             logoutOption.Click += (sender, e) =>
@@ -92,5 +94,9 @@ namespace LiteLerped_WF_API.Classes
                 return false;
             }
         }
+    }
+
+    public class LerpedConfigKeys : ConfigKeys
+    {
     }
 }

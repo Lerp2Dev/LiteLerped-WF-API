@@ -21,7 +21,7 @@ namespace LiteLerped_WF_API
             }
         }
 
-        public static void Run<T>(string prefix, T main) where T : Form
+        public static void Run<T>(string prefix, T main, Action firstConfigExecution) where T : Form
         {
             frmCredentials.SetLoginCallback(main);
 
@@ -29,20 +29,22 @@ namespace LiteLerped_WF_API
             API.LoadConfigCallback(() =>
             {
                 Console.WriteLine("Config callback!!");
-                if (!API.config.AppSettings.Settings.IsEmpty(API.usernameConfig))
-                    cred.a_txtUsername.Text = API.config.AppSettings.Settings[API.usernameConfig].Value;
+                if (!ConfigCore.Settings.IsEmpty(ConfigKeys.usernameConfig))
+                    cred.a_txtUsername.Text = ConfigCore.Settings[ConfigKeys.usernameConfig].Value;
 
-                if (!API.config.AppSettings.Settings.IsEmpty(API.passwordConfig))
-                    cred.a_txtPassword.Text = API.config.AppSettings.Settings[API.passwordConfig].Value;
+                if (!ConfigCore.Settings.IsEmpty(ConfigKeys.passwordConfig))
+                    cred.a_txtPassword.Text = ConfigCore.Settings[ConfigKeys.passwordConfig].Value;
 
-                cred.doingAutologin = !API.config.AppSettings.Settings.IsEmpty(API.usernameConfig) && !API.config.AppSettings.Settings.IsEmpty(API.passwordConfig);
+                cred.doingAutologin = !ConfigCore.Settings.IsEmpty(ConfigKeys.usernameConfig) && !ConfigCore.Settings.IsEmpty(ConfigKeys.passwordConfig);
                 cred.a_chkRemember.Checked = API.RememberingAuth;
             });
-            API.LoadConfig();
+            API.LoadConfig(firstConfigExecution);
 
             //And later, do things that will require it...
             web = new Lerp2Web.Lerp2Web(prefix);
             web.sessionSha = web.StartSession();
+
+            Application.Run(main);
         }
     }
 }

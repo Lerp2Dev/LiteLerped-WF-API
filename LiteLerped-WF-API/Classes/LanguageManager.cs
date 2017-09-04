@@ -1,4 +1,5 @@
-﻿using LiteLerped_WF_API.Controls;
+﻿using Lerp2Web;
+using LiteLerped_WF_API.Controls;
 using System;
 using System.Globalization;
 using System.Linq;
@@ -67,29 +68,12 @@ namespace LiteLerped_WF_API.Classes
             return "";
         }
 
-        public static void ChangeLanguage(string lang)
+        internal static void LangItem_Click(object sender, EventArgs e)
         {
-            Console.WriteLine("Changing lang to " + lang);
-            //Thread.CurrentThread.CurrentCulture = CultureInfo.CreateSpecificCulture(lang);
-            //Thread.CurrentThread.CurrentUICulture = CultureInfo.CreateSpecificCulture(lang);
-
-            /*string[] resourceNames = Assembly.GetExecutingAssembly().GetManifestResourceNames();
-            foreach (string resourceName in resourceNames)
-            {
-                Console.WriteLine("Res name: " + resourceName);
-            }*/
-
-            /*ResourceSet resourceSet = new ComponentResourceManager(typeof(frmCredentials)).GetResourceSet(CultureInfo.GetCultureInfo(lang), true, true);
-            foreach (DictionaryEntry entry in resourceSet)
-            {
-                string resourceKey = entry.Key.ToString();
-                object resource = entry.Value; //resourceSet.GetString(resourceKey);
-                if (resource.GetType().Equals(typeof(string)))
-                    Console.WriteLine("Key: {0}\nValue: {1}\n\n", resourceKey, (string) resource);
-            }*/
-
-            //foreach (Form frm in Application.OpenForms)
-            //    LocalizeForm(frm);
+            string lang = (string) ((ToolStripDropDownItem) sender).Tag;
+            GlobalUICulture = new CultureInfo(lang);
+            ConfigCore.Settings[ConfigKeys.currentLanguage].Value = lang;
+            API.config.Save();
         }
     }
 

@@ -198,13 +198,13 @@ namespace LiteLerped_WF_API
         private void txtUsername_Leave(object sender, EventArgs e)
         {
             ExTextBox username = ((ExTextBox) sender);
-            API.config.AppSettings.Settings[API.usernameConfig].Value = username.Text;
+            ConfigCore.Settings[ConfigKeys.usernameConfig].Value = username.Text;
         }
 
         private void txtPassword_Leave(object sender, EventArgs e)
         {
             ExTextBox password = ((ExTextBox) sender);
-            API.config.AppSettings.Settings[API.passwordConfig].Value = password.Text;
+            ConfigCore.Settings[ConfigKeys.passwordConfig].Value = password.Text;
         }
 
         private void chkRemember_CheckedChanged(object sender, EventArgs e)
@@ -218,7 +218,7 @@ namespace LiteLerped_WF_API
 
         private void frmCredentials_FormClosing(object sender, FormClosingEventArgs e)
         {
-            //...
+            API.config.Save(); //Save althrough is was already saved
         }
 
         private void Register()
