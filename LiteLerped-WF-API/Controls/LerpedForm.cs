@@ -5,6 +5,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Drawing;
 using System.Globalization;
 using System.Linq;
 using System.Resources;
@@ -104,7 +105,7 @@ namespace LiteLerped_WF_API.Controls
 
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LerpedForm));
+            ComponentResourceManager resources = new ComponentResourceManager(typeof(LerpedForm));
             this.SuspendLayout();
             //
             // LerpedForm
@@ -112,6 +113,16 @@ namespace LiteLerped_WF_API.Controls
             resources.ApplyResources(this, "$this");
             this.Name = "LerpedForm";
             this.ResumeLayout(false);
+        }
+
+        public bool ChildReallyVisible(Control child)
+        {
+            Point pos = this.PointToClient(child.PointToScreen(Point.Empty));
+            if (this.GetChildAtPoint(pos) == child) return true;
+            if (this.GetChildAtPoint(new Point(pos.X + child.Width - 1, pos.Y)) == child) return true;
+            // two more to test
+            //...
+            return false;
         }
     }
 }
