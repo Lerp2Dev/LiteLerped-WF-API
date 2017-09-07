@@ -9,6 +9,7 @@ using System.Drawing;
 using System.Globalization;
 using System.Linq;
 using System.Resources;
+using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
 namespace LiteLerped_WF_API.Controls
@@ -78,10 +79,29 @@ namespace LiteLerped_WF_API.Controls
             }
         }
 
+        [DllImport("user32.dll")]
+        private static extern IntPtr GetForegroundWindow();
+
+        private bool IsActive(IntPtr handle)
+        {
+            IntPtr activeHandle = GetForegroundWindow();
+            return (activeHandle == handle);
+        }
+
+        public bool Actived
+        {
+            get
+            {
+                return IsActive(Handle);
+            }
+        }
+
+        public delegate void CustomEventHandler(object sender, ActiveState state);
+
+        public event CustomEventHandler ActiveChanged;
+
         public LerpedForm()
         {
-            //this.culture = CultureInfo.CurrentUICulture;
-
             //Set Localizable to true (no se puede es private)
 
             Shown += (sender, e) =>
@@ -89,6 +109,19 @@ namespace LiteLerped_WF_API.Controls
                 if (!DesignMode)
                     LerpedManager.ManageMenu(this);
             };
+
+            Activated += (sender, e) =>
+            {
+                if (Visible && ActiveChanged != null)
+                    ActiveChanged(this, new ActiveState(true));
+            };
+
+            Deactivate += (sender, e) =>
+            {
+                if (Visible && ActiveChanged != null)
+                    ActiveChanged(this, new ActiveState(false));
+            };
+
             FormClosing += (sender, e) =>
             {
                 ConfigCore.Exiting(() =>
@@ -123,6 +156,20 @@ namespace LiteLerped_WF_API.Controls
             // two more to test
             //...
             return false;
+        }
+    }
+
+    public class ActiveState : EventArgs
+    {
+        public bool IsActive;
+
+        private ActiveState()
+        {
+        }
+
+        public ActiveState(bool isAct)
+        {
+            IsActive = isAct;
         }
     }
 }
