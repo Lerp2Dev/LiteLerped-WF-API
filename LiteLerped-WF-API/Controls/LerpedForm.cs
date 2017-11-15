@@ -8,6 +8,7 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Globalization;
 using System.Linq;
+using System.Reflection;
 using System.Resources;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
@@ -102,6 +103,9 @@ namespace LiteLerped_WF_API.Controls
 
         public LerpedForm()
         {
+            //Console.WriteLine(GetType().GetFields(BindingFlags.Public | BindingFlags.Static)[0].GetValue(null) == null); //.ForEach((x) => { Console.WriteLine("[0]: {1}", GetType().Name, x.Name); });
+            //Console.WriteLine("[{0}] CC: " + ((Form) GetType().GetFields(BindingFlags.Public | BindingFlags.Static).GetValue(null)).Controls.Count, GetType().Name);
+
             //Set Localizable to true (no se puede es private)
 
             Shown += (sender, e) =>
@@ -156,6 +160,14 @@ namespace LiteLerped_WF_API.Controls
             // two more to test
             //...
             return false;
+        }
+
+        public void LoadCallback()
+        {
+            //Console.WriteLine(GetType().GetFields(BindingFlags.Public | BindingFlags.Static)[0].GetValue(null) == null);
+            //Console.WriteLine("[{0}] CC: " + ((Form) GetType().GetField("instance", BindingFlags.Public | BindingFlags.Static).GetValue(null)).Controls.Count, GetType().Name);
+            foreach (Control c in ((Form) GetType().GetFields(BindingFlags.Public | BindingFlags.Static)[0].GetValue(null)).Controls)
+                Console.WriteLine(c.Name);
         }
     }
 
