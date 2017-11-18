@@ -8,7 +8,6 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Globalization;
 using System.Linq;
-using System.Reflection;
 using System.Resources;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
@@ -22,6 +21,9 @@ namespace LiteLerped_WF_API.Controls
     /// <seealso cref="System.Windows.Forms.Form" />
     public class LerpedForm : Form
     {
+        private List<Tuple<Type, string, Control>> controls = new List<Tuple<Type, string, Control>>();
+        private List<Tuple<string, ToolStripItem>> toolStripControls = new List<Tuple<string, ToolStripItem>>();
+
         /// <summary>
         /// Occurs when current UI culture is changed
         /// </summary>
@@ -63,7 +65,9 @@ namespace LiteLerped_WF_API.Controls
                         string Key = entry.Key.ToString(),
                                Value = (string) entry.Value;
 
-                        try
+                        //Prepare an array with all the ToolStripItems available in the form
+
+                        /*try
                         {
                             Control c = Controls.Find(Key, true).SingleOrDefault();
                             c.Text = Value;
@@ -71,6 +75,18 @@ namespace LiteLerped_WF_API.Controls
                         catch
                         {
                             Console.WriteLine("Control {0} is null in form {1}!", Key, GetType().Name);
+                        }*/
+
+                        var ccTuple = controls.SingleOrDefault(x => x.Item2 == Key);
+                        if (ccTuple != null)
+                            ccTuple.Item3.Text = Value;
+                        else
+                        {
+                            var ccTupleItem = toolStripControls.SingleOrDefault(x => x.Item1 == Key);
+                            if (ccTupleItem != null)
+                                ccTupleItem.Item2.Text = Value;
+                            else
+                                Console.WriteLine("[NEW] Control {0} is null in form {1}!", Key, GetType().Name);
                         }
                     }
 
@@ -112,6 +128,16 @@ namespace LiteLerped_WF_API.Controls
             {
                 if (!DesignMode)
                     LerpedManager.ManageMenu(this);
+
+                foreach (Control cc in Controls)
+                {
+                    Type t = cc.GetType();
+                    if (t != typeof(ToolStrip))
+                        controls.Add(new Tuple<Type, string, Control>(t, cc.Name, cc));
+                    else
+                        foreach (ToolStripItem ts in ((ToolStrip) cc).Items)
+                            toolStripControls.Add(new Tuple<string, ToolStripItem>(ts.Name, ts));
+                }
             };
 
             Activated += (sender, e) =>
@@ -162,13 +188,13 @@ namespace LiteLerped_WF_API.Controls
             return false;
         }
 
-        public void LoadCallback()
+        /*public void LoadCallback()
         {
             //Console.WriteLine(GetType().GetFields(BindingFlags.Public | BindingFlags.Static)[0].GetValue(null) == null);
             //Console.WriteLine("[{0}] CC: " + ((Form) GetType().GetField("instance", BindingFlags.Public | BindingFlags.Static).GetValue(null)).Controls.Count, GetType().Name);
             foreach (Control c in ((Form) GetType().GetFields(BindingFlags.Public | BindingFlags.Static)[0].GetValue(null)).Controls)
                 Console.WriteLine(c.Name);
-        }
+        }*/
     }
 
     public class ActiveState : EventArgs

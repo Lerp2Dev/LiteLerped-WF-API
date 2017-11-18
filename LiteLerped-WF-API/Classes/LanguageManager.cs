@@ -31,21 +31,6 @@ namespace LiteLerped_WF_API.Classes
             }
         }
 
-        /*public CultureInfo culture;
-
-        private ResourceManager _rMan;
-        private string baseName;
-
-        public ResourceManager ResMan
-        {
-            get
-            {
-                if (_rMan == null)
-                    _rMan = new ResourceManager(baseName, Assembly.GetExecutingAssembly());
-                return _rMan;
-            }
-        }*/
-
         public LanguageManager(LerpedLanguage def)
             : this(def.ToString().ToLower())
         { }
