@@ -49,8 +49,6 @@ namespace LiteLerped_WF_API.Controls
             {
                 if (this.culture != value)
                 {
-                    //this.ApplyResources(this, value);
-
                     ResourceSet resourceSet = new ComponentResourceManager(GetType()).GetResourceSet(value, true, true);
                     IEnumerable<DictionaryEntry> entries = resourceSet
                         .Cast<DictionaryEntry>()
@@ -65,30 +63,6 @@ namespace LiteLerped_WF_API.Controls
                                Value = (string) entry.Value;
 
                         ControlHandler.SetText(Value, Key); //Aqui lo unico que puedo hacer es buscar directamente la traducción
-
-                        //Prepare an array with all the ToolStripItems available in the form
-
-                        /*try
-                        {
-                            Control c = Controls.Find(Key, true).SingleOrDefault();
-                            c.Text = Value;
-                        }
-                        catch
-                        {
-                            Console.WriteLine("Control {0} is null in form {1}!", Key, GetType().Name);
-                        }*/
-
-                        /*var ccTuple = controls.SingleOrDefault(x => x.Item2 == Key);
-                        if (ccTuple != null)
-                            ccTuple.Item3.Text = Value;
-                        else
-                        {
-                            var ccTupleItem = handledControls.SingleOrDefault(x => x.Item1 == Key);
-                            if (ccTupleItem != null)
-                                ccTupleItem.Item2.Text = Value; //Aqui directamente añadiré un metodo para buscar el nombre y editar el texto
-                            else
-                                Console.WriteLine("[NEW] Control {0} is null in form {1}!", Key, GetType().Name);
-                        }*/
                     }
 
                     this.culture = value;
@@ -120,9 +94,6 @@ namespace LiteLerped_WF_API.Controls
 
         public LerpedForm()
         {
-            //Console.WriteLine(GetType().GetFields(BindingFlags.Public | BindingFlags.Static)[0].GetValue(null) == null); //.ForEach((x) => { Console.WriteLine("[0]: {1}", GetType().Name, x.Name); });
-            //Console.WriteLine("[{0}] CC: " + ((Form) GetType().GetFields(BindingFlags.Public | BindingFlags.Static).GetValue(null)).Controls.Count, GetType().Name);
-
             //Set Localizable to true (no se puede es private)
 
             Shown += (sender, e) =>
@@ -132,8 +103,6 @@ namespace LiteLerped_WF_API.Controls
 
                 foreach (Control cc in Controls)
                     ControlHandler.Add(cc);
-
-                //Console.WriteLine("Number of controls: {0} (in form: {1})", handledControls.Count, string.Join(", ", Controls.Cast<Control>().Select(x => new { t = x.GetType().Name, n = x.Name }).Select(x => string.Format("[type = {0}, name = {1}]", x.t, x.n))));
             };
 
             Activated += (sender, e) =>
@@ -183,14 +152,6 @@ namespace LiteLerped_WF_API.Controls
             //...
             return false;
         }
-
-        /*public void LoadCallback()
-        {
-            //Console.WriteLine(GetType().GetFields(BindingFlags.Public | BindingFlags.Static)[0].GetValue(null) == null);
-            //Console.WriteLine("[{0}] CC: " + ((Form) GetType().GetField("instance", BindingFlags.Public | BindingFlags.Static).GetValue(null)).Controls.Count, GetType().Name);
-            foreach (Control c in ((Form) GetType().GetFields(BindingFlags.Public | BindingFlags.Static)[0].GetValue(null)).Controls)
-                Console.WriteLine(c.Name);
-        }*/
     }
 
     public class ActiveState : EventArgs
@@ -208,15 +169,8 @@ namespace LiteLerped_WF_API.Controls
     }
 }
 
-/*public enum ControlHandlerType
-{
-    Menu, Tool, Control
-}*/
-
 public static class ControlHandler
 {
-    //private static List<ControlData> internalList = new List<ControlData>();
-
     private static ControlData dataHandler = new ControlData();
 
     public static void Add(Control cont)
@@ -224,10 +178,6 @@ public static class ControlHandler
         string t = cont.GetType().Name;
         switch (t)
         {
-            /*dataHandler.AddHandledData(cont);
-            dataHandler.AddUnhandledData(((MenuStrip) cont).drop.Cast<ToolStripMenuItem>(), ControlDataType.Menu); //ToolStripMenuItem
-            break;*/
-
             case "MenuStrip":
             case "ToolStrip":
                 dataHandler.AddHandledData(cont);
@@ -304,22 +254,18 @@ public static class ControlHandler
 
 public class ControlData
 {
-    //internal static List<ControlUnhandledData> unhandledData = new Dictionary<int, ControlUnhandledData>();
-    //internal static List<ControlHandledData> handledData = new List<ControlHandledData>();
     internal static Dictionary<string, Tuple<ControlData, bool>> data = new Dictionary<string, Tuple<ControlData, bool>>();
 
     public void AddUnhandledData(IEnumerable<object> childs, ControlDataType type)
     {
         foreach (object child in childs)
         {
-            //ControlUnhandledData uhn = ;//, type);
-
             ControlUnhandledData uhn = new ControlUnhandledData(child, type);
             Console.WriteLine("Adding child '{0}'", uhn.Name);
 
             try
             {
-                if (!data.ContainsKey(uhn.Name)) //!string.IsNullOrWhiteSpace(child.Name)
+                if (!data.ContainsKey(uhn.Name))
                     data.Add(string.IsNullOrWhiteSpace(uhn.Name) ? uhn.AltName : uhn.Name, new Tuple<ControlData, bool>(uhn, false));
                 else
                     Console.WriteLine("Tried to add repeated toolstrip key with name: '{0}'", uhn.Name);
