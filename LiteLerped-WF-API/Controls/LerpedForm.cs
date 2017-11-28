@@ -184,7 +184,7 @@ public static class ControlHandler
 
                 var items = ((ToolStrip) cont).Items.Cast<ToolStripItem>();
 
-                dataHandler.AddUnhandledData(items, ControlDataType.Tool);
+                //dataHandler.AddUnhandledData(items, ControlDataType.Tool); //Si no vuelvo a añadir los valores no se añadirán duplicados
                 foreach (var it in items)
                     dataHandler.AddUnhandledData(it.GetItems(), ControlDataType.Menu);
                 break;
@@ -272,7 +272,7 @@ public class ControlData
             }
             catch
             {
-                Console.WriteLine("[FAST] Item with the same key already exists!"); //Revisar esta mierda
+                Console.WriteLine("[FAST] Item with the same key already exists!");
             }
         }
     }
