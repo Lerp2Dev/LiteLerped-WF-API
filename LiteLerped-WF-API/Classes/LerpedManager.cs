@@ -2,7 +2,7 @@
 using LiteLerped_WF_API.Controls;
 using System;
 using System.Drawing;
-using System.Globalization;
+
 using System.Linq;
 using System.Windows.Forms;
 
@@ -12,8 +12,6 @@ namespace LiteLerped_WF_API.Classes
     {
         public static void ManageMenu(LerpedForm frm)
         {
-            //LerpedForm frm = (LerpedForm) Application.OpenForms[name];
-
             MenuStrip menu = null;
             if (HasValidMenu(frm, out menu))
                 AttachMenu(menu);

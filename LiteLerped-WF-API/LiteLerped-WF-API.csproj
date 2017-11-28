@@ -60,6 +60,7 @@
   <ItemGroup>
     <Compile Include="Classes\Extensions\ReflectionExtensions.cs" />
     <Compile Include="Classes\LerpedManager.cs" />
+    <Compile Include="Classes\StartupManager.cs" />
     <Compile Include="Controls\Captcha.cs">
       <SubType>UserControl</SubType>
     </Compile>
